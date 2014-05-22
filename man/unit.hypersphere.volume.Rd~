@@ -1,0 +1,54 @@
+\name{unit.hypersphere.volume}
+\alias{unit.hypersphere.volume}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+  Helps When Calculating Densities
+}
+\description{
+ Finds the volume of a hypersphere in R^D with radius one.
+}
+\usage{
+unit.hypersphere.volume(D)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{D}{
+    the number of dimensions that the hypersphere extends into
+  }
+}
+\details{
+%%  ~~ If necessary, more details than the description above ~~
+}
+\value{
+  the volume of the unit hypersphere
+}
+\references{
+  research.cs.tamu.edu/prism/lectures/pr/pr_l8.pdf
+}
+\author{
+  Benjamin N. Taft \email{taftb@uwp.edu}
+}
+\note{
+%%  ~~further notes~~
+}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+\seealso{
+%% ~~objects to See Also as \code{\link{help}}, ~~~
+}
+\examples{
+##---- Should be DIRECTLY executable !! ----
+##-- ==>  Define data, use random,
+##--	or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function (D)
+{
+    return((2 * pi^(D/2))/(D * gamma(D/2)))
+  }
+}
+% Add one or more standard keywords, see file 'KEYWORDS' in the
+% R documentation directory.
+\keyword{ ~kwd1 }
+\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

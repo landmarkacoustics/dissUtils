@@ -1,0 +1,49 @@
+\name{identify.neighbors}
+\alias{identify.neighbors}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+  Find Neighbor Indices
+}
+\description{
+  Uses a distance object and a vector of known distances to identify the
+  neighbors that correspond to those distances.
+}
+\usage{
+identify.neighbors(neighbor.matrix, all.dists)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{neighbor.matrix}{
+    a matrix of distances to neighbors
+  }
+  \item{all.dists}{
+    either a distance object or a matrix of distances such as is
+    produced by \code{differences}
+  }
+}
+\details{
+%%  ~~ If necessary, more details than the description above ~~
+}
+\value{
+  a \code{dim(neighbor.matrix)} matrix of integer indices between 1 and \code{all.dists$Size} or \code{ncol(all.dists)}
+}
+\references{
+%% ~put references to the literature/web site here ~
+}
+\author{
+  Benjamin N. Taft \email{taftb@uwp.edu}
+}
+\note{
+%%  ~~further notes~~
+}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+\seealso{
+  \code{\link{differences}}, \code{\link{dist}}
+}
+\examples{
+}
+% Add one or more standard keywords, see file 'KEYWORDS' in the
+% R documentation directory.
+\keyword{ multivariate }

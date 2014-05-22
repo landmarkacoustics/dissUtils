@@ -1,0 +1,22 @@
+.my.det <- function(n, ix){
+
+    return((2 * n - 3) ^ 2 + 8 * (n - ix));
+}
+
+.raw.i <- function(n, ix){
+
+    return(n + 1/2 - sqrt(my.det(n,ix)) / 2);
+}
+
+.calc.j <- function(i,n,ix){
+
+    return(ix + n + i * (0.5 * (i + 1) - n));
+}
+
+diss.index <- function(index, N){
+
+    i <- floor(.raw.i(N, ix));
+
+    return(c(i = i,
+             j = .calc.j(i,N,ix)));
+}

@@ -1,0 +1,106 @@
+scale.k <- 12;
+p.count <- 20;
+
+fake.data$radius <- rep(runif(50,0,1)^4, 5);
+fake.data$angle <- as.numeric(fake.data$ID) * pi / 5;
+
+fake.data$X <- scale.k*fake.data$radius * cos(fake.data$angle) + rnorm(nrow(fake.data));
+
+fake.data$Y <- scale.k*fake.data$radius * sin(fake.data$angle) + rnorm(nrow(fake.data));
+
+hoops <- data.frame(ID = gl(5,1),
+                    p = rep(1,5),
+                    delta = numeric(5),
+                    X = numeric(5),
+                    Y = numeric(5));
+
+dense <- density.by.group(as.matrix(fake.data[,4:5]),
+                          fake.data$ID,
+                          p.neighbors = 1);
+
+tmp <- apply(dense,1,mean);
+
+mix <- match(max(tmp),tmp);
+
+for(j in 1:5){
+
+    f <- fake.data$ID == j;
+
+    tmp <- diss(matrix(fake.data[mix,4:5],nrow = 1),
+                as.matrix(fake.data[f,4:5]));
+
+    hoops$delta[j] <- min(tmp);
+
+    ix <- match(hoops$delta[j], tmp);
+
+    hoops[j,4:5] <- fake.data[f,][ix,4:5];
+}
+
+for(i in (p.count-1):1){
+
+    temp <- data.frame(ID = gl(5,1),
+                       p = rep(i/p.count,5),
+                       delta = numeric(5),
+                       X = numeric(5),
+                       Y = numeric(5));
+
+    dense <- density.by.group(as.matrix(fake.data[,4:5]),
+                              fake.data$ID,
+                              p.neighbors = i/p.count);
+
+    tmp <- apply(dense,1,mean);
+
+    mix <- match(max(tmp),tmp);
+
+    for(j in 1:5){
+
+        f <- fake.data$ID == j;
+
+        tmp <- diss(matrix(fake.data[mix,4:5],nrow = 1),
+                    as.matrix(fake.data[f,4:5]));
+
+        temp$delta[j] <- min(tmp);
+
+        ix <- match(temp$delta[j], tmp);
+
+        temp[j,4:5] <- fake.data[f,][ix,4:5];
+    }
+    hoops <- rbind(temp, hoops);
+}
+
+## temp <- aggregate(hoops$delta, list(ID = hoops$ID), median)
+
+## dev.new(title="changes");
+
+## plot(0, 0, type = 'n',
+##      xlab = "p.neighbors",
+##      ylab = "distance to densest point",
+##      xlim = c(0,1),
+##      ylim = range(hoops$delta));
+
+## for(j in 1:5){
+##     f <- hoops$ID == j;
+##     points(delta ~ p, hoops[f,], type = 'o', col = rainbow(5)[j]);
+## }
+
+## abline(h = temp$x, col = rainbow(5), lty = 3);
+
+## dev.new(title="scatter");
+
+## plot(Y ~ X,
+##      fake.data,
+##      col = rainbow(5)[ID],
+##      asp = 1);
+
+## points(Y ~ X,
+##        hoops[hoops$delta == 0,],
+##        col = rainbow(5)[ID], pch = 16)
+
+## angles <- unique(fake.data$angle);
+
+## segments(rep(0,length(angles)),
+##          rep(0,length(angles)),
+##          scale.k * cos(angles),
+##          scale.k * sin(angles),
+##          col = rainbow(5));
+

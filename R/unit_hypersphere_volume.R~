@@ -1,0 +1,4 @@
+unit.hypersphere.volume <- function(D){
+#D is the number of dimensions of the hypersphere
+    return((2 * pi ^ (D / 2)) / (D * gamma(D/2)));
+}
