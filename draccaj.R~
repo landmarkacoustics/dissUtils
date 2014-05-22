@@ -1,8 +1,0 @@
-draccaj <- function(X, Y = NULL,
-                    method = "euclidean",
-                    k = 1,
-                    groups = rep(1,
-                                 nrow(X))
-                    ){
-
-
