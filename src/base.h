@@ -1,11 +1,11 @@
-#ifndef BNT_DIFFERENCE_BASE_H
-#define BNT_DIFFERENCE_BASE_H 1
+#ifndef LAC_DIFFERENCE_BASE_H
+#define LAC_DIFFERENCE_BASE_H 1
 
 #include <valarray>
 
 #define DECLARE_VAL_T typedef typename Base<T>::va_t va_t
 
-namespace BNT {
+namespace LAC {
 
   namespace Difference {
 

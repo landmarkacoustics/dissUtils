@@ -1,6 +1,6 @@
 #include "differences.h"
 
-namespace BNT {
+namespace LAC {
 
   namespace Difference {
 

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-  using namespace BNT;
+  using namespace LAC;
 
   using namespace Difference;
 

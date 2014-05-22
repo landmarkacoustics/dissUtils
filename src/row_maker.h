@@ -1,9 +1,9 @@
-#ifndef BNT_DIFFERENCES_ROWMAKER_H
-#define BNT_DIFFERENCES_ROWMAKER_H 1
+#ifndef LAC_DIFFERENCES_ROWMAKER_H
+#define LAC_DIFFERENCES_ROWMAKER_H 1
 
 #include "base.h"
 
-namespace BNT {
+namespace LAC {
 
   namespace Difference {
 

@@ -1,11 +1,11 @@
-#ifndef BNT_DIFFERENCE_NEIGHBOR_SET_H
-#define BNT_DIFFERENCE_NEIGHBOR_SET_H 1
+#ifndef LAC_DIFFERENCE_NEIGHBOR_SET_H
+#define LAC_DIFFERENCE_NEIGHBOR_SET_H 1
 
 #include <utility>
 #include <list>
 #include <algorithm>
 
-namespace BNT {
+namespace LAC {
 
   namespace Difference {
 

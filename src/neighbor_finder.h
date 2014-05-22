@@ -1,7 +1,7 @@
 #include <vector>
 #include <iterator>
 
-namespace BNT {
+namespace LAC {
 
   template <typename NeighborElement, typename DistanceFunctor>
   class NeighborFinder : public DistanceFunctor {

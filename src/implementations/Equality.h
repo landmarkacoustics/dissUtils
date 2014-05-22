@@ -1,7 +1,7 @@
-#ifndef BNT_DIFFERENCE_EQUALITY_H
-#define BNT_DIFFERENCE_EQUALITY_H 1
+#ifndef LAC_DIFFERENCE_EQUALITY_H
+#define LAC_DIFFERENCE_EQUALITY_H 1
 #include "../base.h"
-namespace BNT {
+namespace LAC {
   namespace Difference {
     template<typename T>
     struct Equality : public Base<T> {

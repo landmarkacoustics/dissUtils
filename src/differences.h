@@ -1,5 +1,5 @@
-#ifndef BNT_DIFFERENCES_H
-#define BNT_DIFFERENCES_H 1
+#ifndef LAC_DIFFERENCES_H
+#define LAC_DIFFERENCES_H 1
 
 #include <string>
 
@@ -7,7 +7,7 @@
 #include "generic_factory.h"
 #include "row_maker.h"
 
-namespace BNT {
+namespace LAC {
 
   namespace Difference {
 

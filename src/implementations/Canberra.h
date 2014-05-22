@@ -1,7 +1,7 @@
-#ifndef BNT_DIFFERENCE_CANBERRA_H
-#define BNT_DIFFERENCE_CANBERRA_H 1
+#ifndef LAC_DIFFERENCE_CANBERRA_H
+#define LAC_DIFFERENCE_CANBERRA_H 1
 #include "../base.h"
-namespace BNT {
+namespace LAC {
   namespace Difference {
     template<typename T>
     struct Canberra : public Base<T> {

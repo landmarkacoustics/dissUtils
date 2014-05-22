@@ -1,9 +1,9 @@
-#ifndef BNT_GENERIC_FACTORY_H
-#define BNT_GENERIC_FACTORY_H 1
+#ifndef LAC_GENERIC_FACTORY_H
+#define LAC_GENERIC_FACTORY_H 1
 
 #include <map>
 
-namespace BNT {
+namespace LAC {
 
   namespace Difference {
 

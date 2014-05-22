@@ -1,7 +1,7 @@
-#ifndef BNT_DIFFERENCE_EUCLIDEAN_H
-#define BNT_DIFFERENCE_EUCLIDEAN_H 1
+#ifndef LAC_DIFFERENCE_EUCLIDEAN_H
+#define LAC_DIFFERENCE_EUCLIDEAN_H 1
 #include "../base.h"
-namespace BNT {
+namespace LAC {
   namespace Difference {
     template<typename T>
     struct Euclidean : public Base<T> {
