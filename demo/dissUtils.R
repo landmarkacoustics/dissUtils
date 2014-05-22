@@ -77,6 +77,8 @@ for(lab in c(letters,LETTERS)){
 
     fake.data <- make.example.data();
 
+    p.count <- nlevels(fake.data$ID);
+
     hoops <- make.density.data(fake.data[,4:5],
                                fake.data$ID,
                                1);
