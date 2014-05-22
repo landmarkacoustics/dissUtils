@@ -1,6 +1,0 @@
-neighbor.density <- function(neigh.dists, D, k, N){
-
-    radius <- unit.hypersphere.volume(D);
-
-    return(k / (N * radius * neigh.dists));
-}
