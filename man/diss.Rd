@@ -50,7 +50,6 @@ diss(X, Y = NULL, method = "euclidean", init.info = NULL)
     some \code{method}s require additional information. see above
   }
 }
-
 \value{
   if \code{is.null(Y)}, returns a distance object containing pairwise
   dissimilarities between the points in \code{X}.
@@ -59,5 +58,4 @@ diss(X, Y = NULL, method = "euclidean", init.info = NULL)
   matrix containing pairwise dissimilarities between each point in \code{X}
   and each point in \code{Y}.
 }
-
 \keyword{ multivariate }

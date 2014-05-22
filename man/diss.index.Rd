@@ -1,6 +1,5 @@
 \name{diss.index}
 \alias{diss.index}
-
 \title{
   Convert Indices from Distance Object to Matrix
 }

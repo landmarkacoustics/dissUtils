@@ -3,6 +3,7 @@
 \alias{dissUtils}
 \docType{package}
 \title{
+<<<<<<< HEAD
   Utilities for making pairwise comparisons of multivariate data
 }
 \description{
