@@ -1,0 +1,166 @@
+source("R/knownmethods.R")
+source("R/mahalanobis_help.R")
+source("R/differences.R")
+source("R/neighbors.R")
+source("R/identify_neighbors.R")
+source("R/dist_index.R")
+source("R/unit_hypersphere_volume.R")
+source("R/neighbor_density.R")
+source("R/draccaj.R")
+
+dyn.load(paste("differences",.Platform$dynlib.ext,sep=""));
+
+old.seed <- NULL;
+
+if(exists(".Random.seed")){
+    old.seed <- .Random.seed;
+}
+
+set.seed(42);
+
+#testing chebyshev distance
+
+X <- matrix(rnorm(50),
+            ncol = 2,
+            dimnames = list(paste("X",1:25,sep=""),
+                            paste("V",1:2,sep=""))
+            );
+
+Y <- matrix(rnorm(24),
+            ncol = 2,
+            dimnames = list(paste("Y",1:12,sep=""),
+                            paste("V",1:2,sep=""))
+            );
+
+Ycheb <- differences(Y, X, method = "cheb");
+
+Yneigh <- neighbors(Y, X, method = "cheb", n.neighbors = 4);
+
+Yixes <- identify.neighbors(Yneigh, Ycheb);
+
+dev.new(title = "2D chebyshev differences");
+
+plot(rbind(X, Y),
+     cex = c(rep(2, nrow(X)),
+     rep(2/3, nrow(Y))),
+     asp = 1);
+
+for(i in 1:2){
+    arrows(Y[,1],
+           Y[,2],
+           X[Yixes[,i], rep(1,nrow(Y))],
+           X[Yixes[,i], rep(2,nrow(Y))],
+           col = i+1,
+           length = 0.1);
+}
+
+#testing bray-curtis distance and ordination
+
+P <- matrix(rpois(50,2),
+            ncol = 5,
+            dimnames = list(paste("P",1:10,sep=""),
+                            paste("V",1:5,sep=""))
+            );
+
+P <- P / apply(P,1,sum);
+
+Q <- matrix(rpois(25,2),
+            ncol = 5,
+            dimnames = list(paste("Q",1:5,sep=""),
+                            paste("V",1:5,sep=""))
+            );
+
+Q <- Q / apply(Q,1,sum);
+
+Qneig <- neighbors(Q,P,method = "bray", n.neighbors = 4);
+Qdist <- differences(Q,P,method = "bray");
+Qids <- identify.neighbors(Qneig, Qdist);
+pca <- prcomp(rbind(P,Q));
+PP <- (P %*% pca$rotation)[,1:2];
+QQ <- (Q %*% pca$rotation)[,1:2];
+
+dev.new(title = "projected Bray-Curtis differences");
+
+plot(rbind(PP,QQ),
+     cex = c(rep(2, nrow(PP)),
+     rep(2/3, nrow(QQ))),
+     asp = 1);
+
+for(i in 1:2){
+    arrows(QQ[,1],
+           QQ[,2],
+           PP[Qids[,i], rep(1,nrow(Qids))],
+           PP[Qids[,i], rep(2,nrow(Qids))],
+           col = i+1,
+           length = 0.1);
+}
+
+# testing the actual draccaj process!
+
+require(MASS);
+
+mus <- matrix(0,nrow=2,ncol=2);
+
+errors <- data.frame(instance = gl(300,5),
+                     distance = rep(rgamma(100, 2),
+                                    each = 15),
+                     neighbors = c(2,3,5,10,25)[rep(1:5,300)]
+                     );
+
+for(i in levels(errors$instance)){
+
+    ix <- (as.numeric(i) - 1)*5 + 1:5;
+
+    mus[2,] <- rep(errors$distance[ix][1] * sqrt(2)/2, 2);
+
+    tmp <- as.matrix(rbind(mvrnorm(100,
+                                   mus[1,],
+                                   diag(2)),
+                           mvrnorm(100,
+                                   mus[2,],
+                                   diag(2))));
+
+    for(j in 1:5){
+        errors$correlation[ix][j] <- cor(draccaj(tmp,
+                                                 rep(1:2,each = 100),
+                                                 n.neighbors = errors$neighbors[ix][j]))[2];
+    }
+}
+
+aX <- mvrnorm(100, c(0,0), matrix(c(1,0,0,1), nrow = 2));
+
+angles <- data.frame(instance = gl(300,5),
+                     angle = rep(runif(100, 0, 2*pi),
+                                 each = 15),
+                     neighbors = c(2,3,5,10,25)[rep(1:5,300)]
+                     );
+
+for(i in levels(angles$instance)){
+
+    ix <- (as.numeric(i) - 1)*5 + 1:5;
+
+    theta <- angles$angle[ix][1];
+
+    rmat <- matrix(c(cos(theta),
+                     sin(theta),
+                     sin(theta),
+                     -cos(theta)),
+                   nrow = 2);
+
+    aY <- aX %*% rmat;
+
+    tmp <- as.matrix(rbind(aX,aY));
+
+    for(j in 1:5){
+        angles$correlation[ix][j] <- cor(draccaj(tmp,
+                                                 rep(1:2,each = 100),
+                                                 n.neighbors = angles$neighbors[ix][j]))[2];
+    }
+}
+
+rm(aX, aY);
+
+if(!is.null(old.seed)){
+    .Random.seed <- old.seed;
+}
+

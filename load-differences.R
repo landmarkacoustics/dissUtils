@@ -1,0 +1,11 @@
+source("R/knownmethods.R")
+source("R/mahalanobis_help.R")
+source("R/differences.R")
+source("R/neighbors.R")
+source("R/identify_neighbors.R")
+source("R/dist_index.R")
+source("R/unit_hypersphere_volume.R")
+source("R/neighbor_density.R")
+source("R/draccaj.R")
+
+dyn.load("differences.dll")

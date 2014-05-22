@@ -1,0 +1,7 @@
+useDynLib("dissUtils")
+export(diss,
+       neighbors,
+       diss.index,
+       unit.hypersphere.volume,
+       neighbor.density,
+       density.by.group)

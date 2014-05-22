@@ -1,0 +1,38 @@
+draccaj <- function(X,
+                    groups,
+                    method = "euclidean",
+                    n.neighbors = 1,
+                    init.info = NULL
+                    ){
+
+    if(!(is.matrix(X) || !is.null(ncol(X)))){
+        stop("X must be a matrix or matrix-coercable object");
+    }
+    if(!is.factor(groups)){
+        groups <- factor(groups);
+    }
+
+    densities <- matrix(NA,
+                        nrow(X),
+                        nlevels(groups),
+                        dimnames = list(rownames(X),
+                                        levels(groups))
+                        );
+
+    for(g in 1:nlevels(groups)){
+
+        f <- groups == levels(groups)[g];
+
+        densities[,g] <- neighbor.density(neighbors(X, X[f,],
+                                                    method,
+                                                    n.neighbors,
+                                                    init.info)[,n.neighbors],
+                                          ncol(X),
+                                          n.neighbors,
+                                          sum(f));
+    }
+
+    return(invisible(densities));
+}
+
+
