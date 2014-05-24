@@ -7,19 +7,24 @@ namespace LAC {
     template<typename T>
     struct Mahalanobis : public Base<T> {
       DECLARE_VAL_T;
+    Mahalanobis() : m_cov(1) {}
       virtual bool NeedsInitialization() const { return true; }
       void Initialize(const T* buffer, size_t size) {
-	m_cov = va_t(buffer, size);
+	if(size > 0)
+	  m_cov = va_t(buffer, size);
       }
       T Diff(const va_t& a, const va_t& b) const {
-	va_t u = a - b, v = u;
-	for(size_t i = 0; i < u.size(); ++i)
-	  v[i] = (u * m_cov[std::slice(i, u.size(), 1)]).sum();
+	size_t n = a.size();
+	va_t u = a - b, v(n);
+	for(size_t i = 0; i < n; ++i){
+	  v[i] = (u * m_cov[std::slice(i, n, n)]).sum();
+	}
 	return sqrt( (v * u).sum() );
       }
       Base<T>* Clone() const {
 	Mahalanobis *m = new Mahalanobis;
-	m->Initialize(&m_cov[0], m_cov.size());
+	if(m_cov.size() > 0)
+	  m->Initialize(&m_cov[0], m_cov.size());
 	return m;
       }
     protected:
