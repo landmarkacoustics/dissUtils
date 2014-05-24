@@ -1,0 +1,15 @@
+set.seed(42);
+
+             "braycurtis"                                
+               "canberra"                                
+              "chebyshev"
+             "covariance"
+              "euclidean"                                
+               "equality"                                
+              "hellinger"                                
+                "jaccard"                                
+            "mahalanobis"
+              "manhattan"
+              "minkowski"
+                "pearson"
+             "procrustes" 
