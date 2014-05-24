@@ -19,5 +19,5 @@ approaches <- c("braycurtis",
 
 for(a in approaches){
     cat(a,"\n");
-    print(diss(cats, method = a), digits = 3);
+    print(diss(mat, method = a), digits = 3);
 }

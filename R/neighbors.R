@@ -12,10 +12,15 @@ neighbors <- function(X, Y = NULL,
     # this will throw an error if "method" is not a character vector in knownmethods
     method = match.arg(method, .known.methods);
 
+    if(method == "mahalanobis"){
+        if(is.null(init.info)){
+            init.info <- diag(ncol(X)); # will make it default to Euclidean distance if the next line fails
+            try(init.info <- cov(rbind(X,Y))); # this will just yield cov(X) if Y is NULL
+        }
+        init.info <- solve(init.info); # this inverts the matrix using LAPACK
+    }
+    
     if(is.null(Y)) {
-
-        if(method == "mahalanobis")
-            init.info <- .make.s.prime(X);
 
         return( invisible( matrix(
                                   .C("neighbors",
@@ -35,9 +40,6 @@ neighbors <- function(X, Y = NULL,
                                                         sep = ".")))));
     }
     else if(ncol(X) == ncol(Y)){
-
-        if(method == "mahalanobis")
-            init.info <- .make.s.prime(rbind(X,Y));
 
         return( invisible( matrix(
                                   .C("two_matrix_neighbors",

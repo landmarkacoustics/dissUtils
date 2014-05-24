@@ -16,10 +16,8 @@ namespace LAC {
       T Diff(const va_t& a, const va_t& b) const {
 	size_t n = a.size();
 	va_t u = a - b, v(n);
-	for(size_t i = 0; i < n; ++i){
-	  c = m_cov[std::slice(i*n, n, 1)];
-	  v[i] = (u * ca).sum();
-	}
+	for(size_t i = 0; i < n; ++i)
+	  v[i] = (u * m_cov[std::slice(i*n, n, 1)] ).sum();
 	return sqrt( (v * u).sum() );
       }
       Base<T>* Clone() const {
