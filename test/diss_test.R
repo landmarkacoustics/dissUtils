@@ -1,9 +1,6 @@
 require(dissUtils);
 
-set.seed(42);
-
-cats <- matrix(runif(18,0,2),6);
-dogs <- floor(cats);
+mat <- matrix(c(1,0,1,0.5,0,1,0,0,0.5,0.5,1,0,1,0,0.5),ncol=3);
 
 approaches <- c("braycurtis",
                 "canberra",
@@ -21,5 +18,6 @@ approaches <- c("braycurtis",
                 "procrustes");
 
 for(a in approaches){
-    str(diss(cats, method = a));
+    cat(a,"\n");
+    print(diss(cats, method = a), digits = 3);
 }

@@ -8,13 +8,18 @@ diss <- function(X, Y = NULL,
     if( ! (is.null(Y) || is.matrix(Y) || ( length(dim(Y)) == 2) ) )
         stop("Y must be NULL or a matrix or matrix-coercible object");
 
-    # this will throw an error if "method" is not a character vector in knownmethods
+    # this will throw an error if "method" is not a character vector in known methods
     method = match.arg(method, .known.methods);
 
+    if(method == "mahalanobis"){
+        if(is.null(init.info)){
+            init.info <- diag(ncol(X)); # will make it default to Euclidean distance if the next line fails
+            try(init.info <- cov(rbind(X,Y))); # this will just yield cov(X) if Y is NULL
+        }
+        init.info <- solve(init.info); # this inverts the matrix using LAPACK
+    }
+    
     if(is.null(Y)) {
-
-        if(method == "mahalanobis")
-            init.info <- .make.s.prime(X);
 
         tmp <- .C("differences",
                   as.double(X),
@@ -35,9 +40,6 @@ diss <- function(X, Y = NULL,
         return(invisible(tmp));
     }
     else if(ncol(X) == ncol(Y)){
-
-        if(method == "mahalanobis")
-            init.info <- .make.s.prime(rbind(X,Y));
 
         return( invisible( matrix(
                                   .C("two_matrix_differences",

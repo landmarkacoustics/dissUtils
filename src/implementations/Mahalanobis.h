@@ -17,7 +17,8 @@ namespace LAC {
 	size_t n = a.size();
 	va_t u = a - b, v(n);
 	for(size_t i = 0; i < n; ++i){
-	  v[i] = (u * m_cov[std::slice(i, n, n)]).sum();
+	  c = m_cov[std::slice(i*n, n, 1)];
+	  v[i] = (u * ca).sum();
 	}
 	return sqrt( (v * u).sum() );
       }
