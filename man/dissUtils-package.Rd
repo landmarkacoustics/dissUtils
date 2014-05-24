@@ -3,7 +3,6 @@
 \alias{dissUtils}
 \docType{package}
 \title{
-<<<<<<< HEAD
   Utilities for making pairwise comparisons of multivariate data
 }
 \description{
@@ -13,7 +12,7 @@
   \tabular{ll}{
     Package: \tab dissUtils\cr
     Type: \tab Package\cr
-    Version: \tab 1.0\cr
+    Version: \tab 0.1\cr
     Date: \tab 2012-12-06\cr
     License: \tab GPL (>= 2)\cr
   }
