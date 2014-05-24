@@ -5,9 +5,9 @@ namespace LAC {
   namespace Difference {
     template<typename T>
     struct Canberra : public Base<T> {
-      typedef typename Base<T>::va_t va_t;
+      DECLARE_VAL_T;
       T Diff(const va_t& a, const va_t& b) const {
-	return (abs(a-b) / (abs(a) + abs(b))).sum();
+	return (std::abs(a-b) / (std::abs(a) + std::abs(b))).sum();
       }
       // this gives a different result than R's dist algorithm
       // which uses ( abs(a - b) / abs(a + b) ).sum()

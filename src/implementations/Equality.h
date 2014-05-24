@@ -5,7 +5,7 @@ namespace LAC {
   namespace Difference {
     template<typename T>
     struct Equality : public Base<T> {
-      typedef typename Base<T>::va_t va_t;
+      DECLARE_VAL_T;
       T Diff(const va_t& a, const va_t& b) const {
 	return (a==b).sum();
       }

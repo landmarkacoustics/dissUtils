@@ -5,9 +5,9 @@ namespace LAC {
   namespace Difference {
     template<typename T>
     struct Chebyshev : public Base<T> {
-      typedef typename Base<T>::va_t va_t;
+      DECLARE_VAL_T;
       T Diff(const va_t& a, const va_t& b) const {
-	return abs(a - b).max();
+	return std::abs(a - b).max();
       }
       Base<T>* Clone() const { return new Chebyshev; }
     };

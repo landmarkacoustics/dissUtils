@@ -5,7 +5,7 @@ namespace LAC {
   namespace Difference {
     template<typename T>
     struct BrayCurtis : public Base<T> {
-      typedef typename Base<T>::va_t va_t;
+      DECLARE_VAL_T;
       T Diff(const va_t& a, const va_t& b) const {
 	T S = a.sum()+b.sum(), C = 0;
 	for(size_t i = 0; i < a.size(); ++i)

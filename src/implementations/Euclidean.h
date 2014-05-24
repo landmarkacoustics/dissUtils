@@ -5,9 +5,9 @@ namespace LAC {
   namespace Difference {
     template<typename T>
     struct Euclidean : public Base<T> {
-      typedef typename Base<T>::va_t va_t;
+      DECLARE_VAL_T;
       T Diff(const va_t& a, const va_t& b) const {
-	return sqrt(pow(a - b, 2.0).sum());
+	return std::sqrt(std::pow(a - b, 2.0).sum());
       }
       Base<T>* Clone() const { return new Euclidean; }
     };

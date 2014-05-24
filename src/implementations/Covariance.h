@@ -5,7 +5,7 @@ namespace LAC {
   namespace Difference {
     template<typename T>
     struct Covariance : public Base<T> {
-      typedef typename Base<T>::va_t va_t;
+      DECLARE_VAL_T;
       T Diff(const va_t& a, const va_t& b) const {
 
 	T abar = 0, bbar = 0, Cov = 0;

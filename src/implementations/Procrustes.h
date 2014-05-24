@@ -5,7 +5,7 @@ namespace LAC {
   namespace Difference {
     template<typename T>
     struct Procrustes : public Base<T> {
-      typedef typename Base<T>::va_t va_t;
+      DECLARE_VAL_T;
       Procrustes() : m_cols(1u) {}
       ~Procrustes() {}
       virtual bool NeedsInitialization() const { return true; }
@@ -18,7 +18,7 @@ namespace LAC {
 	T d = 0.0;
 	for(size_t i = 0; i < nr; ++i){
 	  std::slice ix(i, m_cols, nr);
-	  d += sqrt( pow(a[ix] - b[ix], 2.0).sum() );
+	  d += std::sqrt( std::pow(a[ix] - b[ix], 2.0).sum() );
 	}
 	return d;
       }

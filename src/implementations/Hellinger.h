@@ -5,9 +5,9 @@ namespace LAC {
   namespace Difference {
     template<typename T>
     struct Hellinger : public Base<T> {
-      typedef typename Base<T>::va_t va_t;
+      DECLARE_VAL_T;
       T Diff(const va_t& a, const va_t& b) const {
-	return pow(2.0, -0.5) * sqrt( pow(sqrt(a) - sqrt(b), 2.0).sum() );
+	return std::pow(2.0, -0.5) * std::sqrt( std::pow(std::sqrt(a) - std::sqrt(b), 2.0).sum() );
       }
       Base<T>* Clone() const { return new Hellinger; }
     };

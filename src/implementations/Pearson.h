@@ -26,7 +26,7 @@ namespace LAC {
 
 	}
 
-	return Cov / ( sqrt(atwo) * sqrt(btwo) );
+	return Cov / ( std::sqrt(atwo) * std::sqrt(btwo) );
       }
       Base<T>* Clone() const { return new Pearson; }
     };

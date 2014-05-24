@@ -5,7 +5,7 @@ namespace LAC {
   namespace Difference {
     template<typename T>
     struct Minkowski : public Base<T> {
-      typedef typename Base<T>::va_t va_t;
+      DECLARE_VAL_T;
       Minkowski() : m_p(2.0), m_q(0.5) {}
       ~Minkowski() {}
       //    virtual bool NeedsInitialization() const { return true; }
@@ -16,7 +16,7 @@ namespace LAC {
 	}
       }
       T Diff(const va_t& a, const va_t& b) const {
-	return pow(pow(a - b, m_p).sum(), m_q);
+	return std::pow(std::pow(a - b, m_p).sum(), m_q);
       }
       Base<T>* Clone() const {
 	Minkowski* m = new Minkowski;
