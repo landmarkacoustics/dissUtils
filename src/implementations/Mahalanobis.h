@@ -21,14 +21,7 @@ namespace LAC {
       }
       Base<T>* Clone() const {
 	Mahalanobis *m = new Mahalanobis;
-	size_t n = m_cov.size();
-	if(n > 0){
-	  double *buffer = new double[n];
-	  for(size_t i = 0; i < n; ++i)
-	    buffer[i] = m_cov[i];
-	  m->Initialize(buffer, n);
-	  delete [] buffer;
-	}
+	m->m_cov = m_cov;
 	return m;
       }
     protected:
