@@ -4,20 +4,25 @@
 namespace LAC {
   namespace Difference {
     template<typename T>
-    struct Mahalanobis : public Base<T> {
+      struct Mahalanobis : public Base<T> {
       DECLARE_VAL_T;
-    Mahalanobis() : m_cov(1) {}
+      Mahalanobis() {}
       virtual bool NeedsInitialization() const { return true; }
       void Initialize(const T* buffer, size_t size) {
-	if(size > 0)
-	  m_cov = va_t(buffer, size);
+	m_cov = va_t(buffer, size);
       }
       T Diff(const va_t& a, const va_t& b) const {
 	size_t n = a.size();
-	va_t u = a - b, v(n);
-	for(size_t i = 0; i < n; ++i)
-	  v[i] = (u * m_cov[std::slice(i*n, n, 1)] ).sum();
-	return std::sqrt( (v * u).sum() );
+	if( m_cov.size() == n * n){
+	  va_t u = a - b, v(n);
+	  for(size_t i = 0; i < n; ++i){
+	    va_t tmp = m_cov[std::slice(i * n, n, 1)];
+	    tmp *= u;
+	    v[i] = u.sum();
+	  }
+	  return std::sqrt( (u * v).sum() );
+	}
+	return Base<T>::NaN();
       }
       Base<T>* Clone() const {
 	Mahalanobis *m = new Mahalanobis;

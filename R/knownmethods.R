@@ -7,7 +7,6 @@
                     "equality",
                     "hellinger",
                     "jaccard",
-                    "jointentropy",
                     "mahalanobis",
                     "manhattan",
                     "minkowski",
