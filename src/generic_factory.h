@@ -2,7 +2,6 @@
 #define LAC_GENERIC_FACTORY_H 1
 
 #include <map>
-#include <iostream>
 
 namespace LAC {
 
@@ -12,11 +11,8 @@ namespace LAC {
     class GenericFactory {
     public:
       template< class Iterator >
-      GenericFactory(Iterator b, Iterator e) : m_map(b,e) {
-	std::cerr << "making factory " << this << std::endl;
-      }
+      GenericFactory(Iterator b, Iterator e) : m_map(b,e) {}
       ~GenericFactory(){
-	std::cerr << "destroying factory " << this << std::endl;
 	for(it_t it = m_map.begin(); it != m_map.end(); ++it){
 	  T* tmp = it->second;
 	  it->second = 0;

@@ -1,7 +1,6 @@
 #ifndef LAC_DIFFERENCE_MAHALANOBIS_H
 #define LAC_DIFFERENCE_MAHALANOBIS_H 1
 #include "../base.h"
-#include <iostream>
 
 namespace LAC {
   namespace Difference {
@@ -9,7 +8,7 @@ namespace LAC {
       struct Mahalanobis : public Base<T> {
       DECLARE_VAL_T;
       Mahalanobis() {}
-      virtual ~Mahalanobis() { std::cerr << "Mahal{" << this << "}[" << m_cov.size() << "]" << std::endl;}
+      virtual ~Mahalanobis() {}
       virtual bool NeedsInitialization() const { return true; }
       void Initialize(const T* buffer, size_t size) {
 	m_cov.resize(size);
