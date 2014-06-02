@@ -17,9 +17,16 @@ namespace LAC {
 
     typedef std::map<key_t, val_t*> options_map_t;
 
-    typedef GenericFactory<key_t, val_t> Factory;
+    class Factory : public GenericFactory<key_t, val_t> {
+    public:
+      static const Factory* GetFactory();
+    private:
+      template< class Iterator >
+	Factory(Iterator b, Iterator e) : GenericFactory<key_t, val_t>(b,e) {}
+      Factory(Factory const&);
+      void operator=(Factory const&);
+    };
 
-    Factory* MakeFactory();
   }
 }
 

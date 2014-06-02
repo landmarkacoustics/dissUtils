@@ -13,7 +13,7 @@ extern "C" {
 			    int *n_neighbors,
 			    double *OUT){
 
-    Factory* factory = MakeFactory();
+    const Factory* factory = Factory::GetFactory();
 
     val_t *F = factory->Create(*method);
 

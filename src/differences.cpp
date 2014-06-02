@@ -14,7 +14,7 @@ extern "C" {
 
 		   double *OUT){
 
-    Factory* factory = MakeFactory();
+    const Factory* factory = Factory::GetFactory();
 
     val_t *F = factory->Create(*method);
 
@@ -47,7 +47,5 @@ extern "C" {
     }
     else
       OUT[0] = -3.14;
-
-    delete factory;
   }
 }

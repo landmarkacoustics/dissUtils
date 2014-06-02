@@ -1,3 +1,5 @@
+// Copyright (C) 2014 by Landmark Acoustics LLC
+
 #include "differences.h"
 
 extern "C" {
@@ -12,7 +14,7 @@ extern "C" {
 			      double *init_info, int *info_size,
 			      double *OUT){
 
-    Factory* factory = MakeFactory();
+    const Factory* factory = Factory::GetFactory();
 
     val_t *F = factory->Create(*method);
 
@@ -46,7 +48,5 @@ extern "C" {
     }
     else
       OUT[0] = -3.14;
-
-    delete factory;
   }
 }

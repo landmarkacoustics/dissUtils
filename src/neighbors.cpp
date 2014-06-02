@@ -16,7 +16,7 @@ extern "C" {
 
 		 double *OUT){
 
-    Factory* factory = MakeFactory();
+    const Factory* factory = Factory::GetFactory();
 
     val_t *F = factory->Create(*method);
 
